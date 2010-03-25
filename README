@@ -1,0 +1,12 @@
+Script to build OpenSSL for iPhone device and simulator Platform
+Tested against:
+	iPhone SDK 3.1.2
+	OpenSSL 0.9.8n
+
+Place openssl-0.9.8n.tar.gz in Archive subsdirectory and run:
+
+	bash Build.sh
+
+I refered following blog page:
+	Tutorial: How To Compile OpenSSL for the iPhone (1st Jan, 2009)
+	http://www.therareair.com/2009/01/01/tutorial-how-to-compile-openssl-for-the-iphone/
