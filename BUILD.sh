@@ -1,6 +1,7 @@
 #!/bin/bash
 TARGET=openssl-0.9.8n
-SDK_VERSION=3.1.2
+#SDK_VERSION=3.1.2
+SDK_VERSION=3.1.3
 
 OPATH=$PATH
 
