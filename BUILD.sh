@@ -18,7 +18,7 @@ echo "Building binary for iPhone $LIBNAME $PLATFORM to $DISTDIR"
 echo Removing ${TARGET}
 /bin/rm -rf ${TARGET}
 echo Extracting ${TARGET}
-tar zxf Archive/${TARGET}.tar.gz
+tar zxf ${TARGET}.tar.gz
 
 case $LIBNAME in
 device)  ARCH="armv6";;
