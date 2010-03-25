@@ -5,7 +5,7 @@ Tested against:
 
 Place openssl-0.9.8n.tar.gz in this directory, then:
 
-	bash Build.sh
+	bash Build-OpenSSL.sh
 
 library will be ready in newly created 'dist' directory.
 
