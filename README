@@ -3,9 +3,11 @@ Tested against:
 	iPhone SDK 3.1.2 and 3.1.3
 	OpenSSL 0.9.8n
 
-Place openssl-0.9.8n.tar.gz in Archive subsdirectory and run:
+Place openssl-0.9.8n.tar.gz in Archive sub-directory, then:
 
 	bash Build.sh
+
+# create Archive directory accordingly.
 
 I refered following blog page:
 	Tutorial: How To Compile OpenSSL for the iPhone (1st Jan, 2009)
