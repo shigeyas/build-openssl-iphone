@@ -75,7 +75,7 @@ build_openssl "simulator" "iPhoneSimulator"
 
 ### Then, combine them into one..
 
-echo "Crating combined binary into directory 'dist'"
+echo "Creating combined binary into directory 'dist'"
 /bin/rm -rf dist
 mkdir dist
 (cd dist-device; tar cf - . ) | (cd dist; tar xf -)
