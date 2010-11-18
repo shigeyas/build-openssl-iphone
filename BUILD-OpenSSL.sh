@@ -1,5 +1,5 @@
 #!/bin/bash
-TARGET=openssl-0.9.8n
+TARGET=openssl-1.0.0a
 SDK_VERSION=4.2
 
 OPATH=$PATH
@@ -20,8 +20,8 @@ echo Extracting ${TARGET}
 tar zxf ${TARGET}.tar.gz
 
 case $LIBNAME in
-device)  ARCH="armv6";;
-*)       ARCH="i386";;
+device)  ARCH="armv6";ASSEMBLY="no-asm";;
+*)       ARCH="i386";ASSEMBLY="";;
 esac
 
 cd ${TARGET}
@@ -42,7 +42,7 @@ SDKPATH="/Developer/Platforms/${PLATFORM}.platform/Developer/SDKs/${PLATFORM}${S
 
 mkdir ${DISTDIR}
 
-./config --openssldir=${DISTDIR}
+./config --openssldir=${DISTDIR} ${ASSEMBLY}
 
 perl -pi.bak \
     -e "s;CC= cc;CC = /Developer/Platforms/${PLATFORM}.platform/Developer/usr/bin/gcc; ;" \
