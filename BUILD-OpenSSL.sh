@@ -1,6 +1,7 @@
 #!/bin/bash
-TARGET=openssl-1.0.0c
-SDK_VERSION=4.2
+TARGET=openssl-1.0.1c
+SDK_VERSION=6.0
+DEVROOT="/Applications/Xcode.app/Contents/Developer"
 
 OPATH=$PATH
 
@@ -20,7 +21,7 @@ echo Extracting ${TARGET}
 tar zxf ${TARGET}.tar.gz
 
 case $LIBNAME in
-device)  ARCH="armv6";ASSEMBLY="no-asm";;
+device)  ARCH="armv7";ASSEMBLY="no-asm";;
 *)       ARCH="i386";ASSEMBLY="";;
 esac
 
@@ -35,17 +36,17 @@ echo To: `fgrep 'intr_signal;' crypto/ui/ui_openssl.c`
 
 # Compile a version for the device...
 
-PATH=/Developer/Platforms/${PLATFORM}.platform/Developer/usr/bin:$OPATH
+PATH="${DEVROOT}/Platforms/${PLATFORM}.platform/Developer/usr/bin:$OPATH"
 export PATH
 
-SDKPATH="/Developer/Platforms/${PLATFORM}.platform/Developer/SDKs/${PLATFORM}${SDK_VERSION}.sdk"
+SDKPATH="${DEVROOT}/Platforms/${PLATFORM}.platform/Developer/SDKs/${PLATFORM}${SDK_VERSION}.sdk"
 
 mkdir ${DISTDIR}
 
 ./config --openssldir=${DISTDIR} ${ASSEMBLY}
 
 perl -pi.bak \
-    -e "s;CC= cc;CC = /Developer/Platforms/${PLATFORM}.platform/Developer/usr/bin/gcc; ;" \
+    -e "s;CC= cc;CC = ${DEVROOT}/Platforms/${PLATFORM}.platform/Developer/usr/bin/gcc; ;" \
     -e "s;CFLAG= ;CFLAG=-arch ${ARCH} -isysroot ${SDKPATH} ; ;" \
     -e "s;-arch i386;-arch ${ARCH}; ;" \
 	Makefile
@@ -77,7 +78,8 @@ build_openssl "simulator" "iPhoneSimulator"
 echo "Creating combined binary into directory 'dist'"
 /bin/rm -rf dist
 mkdir dist
-(cd dist-device; tar cf - . ) | (cd dist; tar xf -)
+TOP=`pwd`
+(cd ${TOP}/dist-device; /usr/bin/tar cf - . ) | (cd ${TOP}/dist; /usr/bin/tar xf -)
 
 for i in crypto ssl
 do
